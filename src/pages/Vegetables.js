@@ -2,7 +2,7 @@ import React from "react";
 
 /* Vegetables category */
 const Vegetables = () => {
-  return <div>vegetables</div>;
+  return <div></div>;
 };
 
 export default Vegetables;
