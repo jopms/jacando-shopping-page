@@ -7,8 +7,15 @@ body {
 
 #root {
   height: 100%;
+  margin: 0 5rem;
 }
 
 body > * {
-  font-family: "Overpass", sans-serif;
+  font-family: "Roboto", sans-serif;
+}
+
+.main {
+  display: grid;
+  padding-top: 260px;
+  grid-template-columns: 1fr 3fr;
 }

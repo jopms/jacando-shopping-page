@@ -3,14 +3,14 @@
 .header-wrapper {
   position: fixed;
   height: 100px;
-  background-color: $header-color;
+  background-color: $header-background;
   display: flex;
   grid-column-start: 3;
   justify-content: flex-end;
   align-items: center;
   width: calc(100% - 10rem);
-  margin: 5rem;
   border-radius: 50px;
+  margin-top: 5rem;
 
   .org-logo {
   }

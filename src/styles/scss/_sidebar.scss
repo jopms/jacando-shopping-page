@@ -1,0 +1,32 @@
+@import "variables.scss";
+
+.sidebar-wrapper {
+  width: 12rem;
+  text-align: center;
+  color:$sidebar-entry;
+  position: fixed;
+  .sidebar-title {
+    font-size: 30px;
+    padding: 1rem 0;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color:$sidebar-entry;
+  }
+  .sidebar-entry {
+    padding: 1rem;
+    margin-bottom: 50px;
+    border: 2px solid $sidebar-entry;
+    border-radius: 30px;
+    font-size: 22px;
+    box-shadow: 0px 4px 30px #63636326;
+    transition: box-shadow, font-weight 0.2s ease-in-out;
+    color:$sidebar-entry;
+    &:hover{
+        cursor: pointer;
+        box-shadow: none;
+        font-weight: bold;
+        
+    }
+  }
+}
