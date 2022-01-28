@@ -3,30 +3,85 @@
 .sidebar-wrapper {
   width: 12rem;
   text-align: center;
-  color:$sidebar-entry;
+  color: $sidebarEntry;
+  display: flex;
+  flex-direction: column;
+  padding-right: 50px;
   position: fixed;
   .sidebar-title {
     font-size: 30px;
-    padding: 1rem 0;
+    padding-bottom: 1rem;
     letter-spacing: 4px;
     margin-bottom: 20px;
     font-weight: bold;
-    color:$sidebar-entry;
+    color: $sidebarEntry;
   }
   .sidebar-entry {
     padding: 1rem;
     margin-bottom: 50px;
-    border: 2px solid $sidebar-entry;
+    border: 2px solid $sidebarEntry;
     border-radius: 30px;
     font-size: 22px;
-    box-shadow: 0px 4px 30px #63636326;
+    box-shadow: 0px 4px 30px $sidebarShadow;
     transition: box-shadow, font-weight 0.2s ease-in-out;
-    color:$sidebar-entry;
-    &:hover{
-        cursor: pointer;
-        box-shadow: none;
-        font-weight: bold;
-        
+    color: $sidebarEntry;
+    text-decoration: none;
+    &:hover {
+      cursor: pointer;
+      box-shadow: none;
+      font-weight: bold;
     }
+    &.active {
+      font-weight: bold;
+      box-shadow: none;
+    }
+  }
+}
+
+.product-item-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 30px;
+  width: 100%;
+  padding: 70px;
+  margin: auto;
+  margin-left: 250px;
+}
+
+.product-arrows {
+  position: fixed;
+  width: calc(100% - 10rem - 250px);
+  display: flex;
+  justify-content: space-between;
+  margin-left: 250px;
+  .product-arrow-text {
+    display: flex;
+    align-items: center;
+    font-size: 25px;
+    color: $productNavigationText;
+  }
+  button {
+    background-color: transparent;
+    border: 2px solid $productNavigationArrow;
+    margin: 0 100px;
+    border-radius: 50%;
+    height: 64px;
+    width: 64px;
+    &:hover {
+      border: 2px solid $productNavigationArrowHover;
+      cursor: pointer;
+      .arrow {
+        path {
+          fill: $productNavigationArrowHover;
+        }
+      }
+    }
+  }
+  .arrow {
+    path {
+      fill: $productNavigationArrow;
+    }
+    height: 48px;
+    width: 48px;
   }
 }

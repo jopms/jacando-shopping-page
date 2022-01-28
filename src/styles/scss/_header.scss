@@ -2,38 +2,42 @@
 
 .header-wrapper {
   position: fixed;
-  height: 100px;
-  background-color: $header-background;
-  display: flex;
-  grid-column-start: 3;
-  justify-content: flex-end;
-  align-items: center;
   width: calc(100% - 10rem);
-  border-radius: 50px;
-  margin-top: 5rem;
-
-  .org-logo {
-  }
-  .user-settings {
+  max-width: 3000px;
+  background-color: white;
+  z-index: 1;
+  .header {
+    z-index: 1;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    height: 100px;
+    background-color: $headerBackground;
     display: flex;
-    .user {
+    grid-column-start: 3;
+    justify-content: flex-end;
+    align-items: center;
+    border-radius: 50px;
+    .user-settings {
       display: flex;
-      align-items: center;
-      height: fit-content;
-      .user-logo {
+      .user {
+        display: flex;
+        align-items: center;
+        height: fit-content;
+        .user-logo {
+          height: 30px;
+          border-radius: 50%;
+          padding: 0px 35px;
+        }
+        .user-name {
+          font-size: 18px;
+        }
+      }
+      .shopping-cart {
         height: 30px;
-        border-radius: 50%;
-        padding: 0px 35px;
-      }
-      .user-name {
-        font-size: 18px;
-      }
-    }
-    .shopping-cart {
-      height: 30px;
-      padding-right: 35px;
-      &:hover {
-        cursor: pointer;
+        padding-right: 35px;
+        &:hover {
+          cursor: pointer;
+        }
       }
     }
   }

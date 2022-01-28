@@ -7,14 +7,22 @@ import shoppingCart from "../styles/img/shopping-cart.png";
 const Header = () => {
   return (
     <div className="header-wrapper">
-      <div className="org-logo"></div>
-      <div className="user-settings">
-        <div className="user">
-          <span className="user-name">Hello, João Santos</span>
-          <img className="user-logo" src={avatar} alt="avatar" />
+      
+      <div className="header">
+        <div className="org-logo"></div>
+        <div className="user-settings">
+          <div className="user">
+            <span className="user-name">Hello, João Santos</span>
+            <img className="user-logo" src={avatar} alt="avatar" />
+          </div>
+          <img
+            className="shopping-cart"
+            src={shoppingCart}
+            alt="shopping-cart"
+          />
         </div>
-        <img className="shopping-cart" src={shoppingCart} alt="shopping-cart" />
       </div>
+      
     </div>
   );
 };

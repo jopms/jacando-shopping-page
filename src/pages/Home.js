@@ -2,7 +2,7 @@ import React from "react";
 
 /* Home screen */
 const Home = () => {
-  return <div></div>;
+  return <div className="category-content"></div>;
 };
 
 export default Home;

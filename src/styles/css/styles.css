@@ -8,6 +8,7 @@ body {
 #root {
   height: 100%;
   margin: 0 5rem;
+  max-width: 3000px;
 }
 
 body > * {
@@ -15,7 +16,13 @@ body > * {
 }
 
 .main {
-  display: grid;
+  display: flex;
   padding-top: 260px;
-  grid-template-columns: 1fr 3fr;
+  min-height: 525px;
+}
+
+@media only screen and (min-width: 3160px) {
+  #root {
+    margin: auto;
+  }
 }

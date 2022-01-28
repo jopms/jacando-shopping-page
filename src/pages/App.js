@@ -5,7 +5,7 @@ import Vegetables from "./Vegetables";
 import Fruits from "./Fruits";
 import Cheese from "./Cheese";
 import Header from "../components/Header";
-import Categories from "../components/Categories";
+import Categories from "../components/Sidebar";
 
 /* Handles Routing */
 const App = () => {
