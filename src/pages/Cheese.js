@@ -23,37 +23,42 @@ const Cheese = () => {
         <ProductItem
           title="Roquefort"
           description={desc}
-          price={10}
+          price={20}
           currency="€"
-          per={"/kg"}
+          unit="kg"
+          quantity={16}
         />
         <ProductItem
           title="Roquefort"
           description={desc}
-          price={10}
+          price={20}
           currency="€"
-          per={"/kg"}
+          unit="kg"
+          quantity={16}
         />
         <ProductItem
           title="Roquefort"
           description={desc}
-          price={10}
+          price={20}
           currency="€"
-          per={"/kg"}
+          unit="kg"
+          quantity={16}
         />
         <ProductItem
           title="Roquefort"
           description={desc}
-          price={10}
+          price={20}
           currency="€"
-          per={"/kg"}
+          unit="kg"
+          quantity={16}
         />
         <ProductItem
           title="Roquefort"
           description={desc}
-          price={10}
+          price={20}
           currency="€"
-          per={"/kg"}
+          unit="kg"
+          quantity={16}
         />
       </div>
     </>

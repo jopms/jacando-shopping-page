@@ -23,17 +23,19 @@
     border-radius: 30px;
     font-size: 22px;
     box-shadow: 0px 4px 30px $sidebarShadow;
-    transition: box-shadow, font-weight 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
     color: $sidebarEntry;
     text-decoration: none;
     &:hover {
       cursor: pointer;
       box-shadow: none;
       font-weight: bold;
+      background-color: $sidebarEntryActive;
     }
     &.active {
       font-weight: bold;
       box-shadow: none;
+      background-color: $sidebarEntryActive;
     }
   }
 }

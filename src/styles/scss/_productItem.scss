@@ -21,31 +21,44 @@
       color: $individualProductTitle;
     }
     .product-description {
-      padding: 25px 15px;
+      padding: 25px 15px 10px;
     }
     .product-price {
       color: $individualProductDescription;
     }
-  }
-  .product-add-basket {
-    position: absolute;
-    right: 12%;
-    bottom: 12%;
-    border: 2px solid $individualProductAddToBasket;
-    color: $individualProductAddToBasket;
-    width: 12%;
-    height: 12%;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 35px;
-    background-color: $individualProductAddToBasketBackground;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    &:hover {
-      color: $individualProductAddToBasketHover;
-      border-color: $individualProductAddToBasketHover;
+    .product-quantity {
+      font-size: 14px;
+      padding-left: 10px;
+      color: $individualProductQuantity;
+      transition: all 0.2s ease-in-out;
+    }
+    .product-handle-basket-wrapper {
+      display: flex;
+      padding-top: 20px;
+      .product-basket-quantity {
+        display: flex;
+        align-items: center;
+        color: $individualProductAddToBasket;
+        padding: 0 8px;
+      }
+      .product-handle-basket {
+        border: 2px solid $individualProductAddToBasket;
+        color: $individualProductAddToBasket;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: $individualProductAddToBasketBackground;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+        &:hover {
+          color: $individualProductAddToBasketHover;
+          border-color: $individualProductAddToBasketHover;
+        }
+      }
     }
   }
 }

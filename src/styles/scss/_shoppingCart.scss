@@ -1,0 +1,33 @@
+@import "variables.scss";
+
+.shopping-cart-button {
+  border: none;
+  background-color: transparent;
+  position: relative;
+
+  padding: 0;
+
+  .shopping-cart-img {
+    height: 30px;
+    padding: 18px 18px 18px 0;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .shopping-cart-notification {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 0;
+    top: -10;
+    background-color: red;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    color: white;
+    font-weight: bold;
+  }
+}

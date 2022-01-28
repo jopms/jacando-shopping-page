@@ -23,37 +23,42 @@ const Vegetables = () => {
         <ProductItem
           title="Carrot"
           description={desc}
-          price={1.7}
+          price={2}
           currency="€"
-          per={" /kg"}
+          unit="kg"
+          quantity={16}
         />
         <ProductItem
           title="Carrot"
           description={desc}
-          price={1.7}
+          price={2}
           currency="€"
-          per={"/kg"}
+          unit="kg"
+          quantity={16}
         />
         <ProductItem
           title="Carrot"
           description={desc}
-          price={1.7}
+          price={2}
           currency="€"
-          per={"/kg"}
+          unit="kg"
+          quantity={16}
         />
         <ProductItem
           title="Carrot"
           description={desc}
-          price={1.7}
+          price={2}
           currency="€"
-          per={"/kg"}
+          unit="kg"
+          quantity={16}
         />
         <ProductItem
           title="Carrot"
           description={desc}
-          price={1.7}
+          price={2}
           currency="€"
-          per={"/kg"}
+          unit="kg"
+          quantity={16}
         />
       </div>
     </>

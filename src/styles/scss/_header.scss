@@ -19,10 +19,11 @@
     border-radius: 50px;
     .user-settings {
       display: flex;
+      padding-right: 30px;
       .user {
         display: flex;
         align-items: center;
-        height: fit-content;
+        
         .user-logo {
           height: 30px;
           border-radius: 50%;

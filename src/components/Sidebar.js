@@ -8,10 +8,18 @@ const Sidebar = () => {
   return (
     <div className="sidebar-wrapper">
       <div className="sidebar-title">Categories</div>
-      <NavLink activeClassName="sidebar-selected" className="sidebar-entry" exact to="/">Home</NavLink>
-      <NavLink activeClassName="sidebar-selected" className="sidebar-entry" exact to="/vegetables">Vegetables</NavLink>
-      <NavLink activeClassName="sidebar-selected" className="sidebar-entry" exact to="/fruits">Fruits</NavLink>
-      <NavLink activeClassName="sidebar-selected" className="sidebar-entry" exact to="/cheese">Cheese</NavLink>
+      <NavLink className="sidebar-entry" to="/">
+        Home
+      </NavLink>
+      <NavLink className="sidebar-entry" to="/vegetables">
+        Vegetables
+      </NavLink>
+      <NavLink className="sidebar-entry" to="/fruits">
+        Fruits
+      </NavLink>
+      <NavLink className="sidebar-entry" to="/cheese">
+        Cheese
+      </NavLink>
     </div>
   );
 };
