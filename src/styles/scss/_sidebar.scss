@@ -9,12 +9,13 @@
   padding-right: 50px;
   position: fixed;
   .sidebar-title {
-    font-size: 30px;
+    font-size: 26px;
     padding-bottom: 1rem;
-    letter-spacing: 4px;
+    letter-spacing: 2px;
     margin-bottom: 20px;
     font-weight: bold;
     color: $sidebarEntry;
+    text-transform: uppercase;
   }
   .sidebar-entry {
     padding: 1rem;
@@ -26,16 +27,19 @@
     transition: all 0.2s ease-in-out;
     color: $sidebarEntry;
     text-decoration: none;
+    text-transform: uppercase;
     &:hover {
       cursor: pointer;
       box-shadow: none;
-      font-weight: bold;
+    
       background-color: $sidebarEntryActive;
+      color: $sidebarEntryActiveText;
     }
     &.active {
-      font-weight: bold;
+     
       box-shadow: none;
       background-color: $sidebarEntryActive;
+      color: $sidebarEntryActiveText;
     }
   }
 }
@@ -64,17 +68,24 @@
   }
   button {
     background-color: transparent;
+    border-radius: 50%;
     border: 2px solid $productNavigationArrow;
     margin: 0 100px;
-    border-radius: 50%;
-    height: 64px;
-    width: 64px;
+    height: 44px;
+    width: 44px;
+    padding: 0px;
+    transition: all 0.2s ease-in-out;
+    svg {
+     
+      width: 40px !important;
+      height: 40px !important;
+    }
     &:hover {
-      border: 2px solid $productNavigationArrowHover;
+     background-color: $productNavigationArrow;;
       cursor: pointer;
       .arrow {
         path {
-          fill: $productNavigationArrowHover;
+          fill: white;
         }
       }
     }

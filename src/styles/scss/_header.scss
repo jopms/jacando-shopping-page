@@ -4,7 +4,7 @@
   position: fixed;
   width: calc(100% - 10rem);
   max-width: 3000px;
-  background-color: white;
+  background-color: $headerWrapper;
   z-index: 1;
   .header {
     z-index: 1;
@@ -23,14 +23,16 @@
       .user {
         display: flex;
         align-items: center;
-        
+
         .user-logo {
           height: 30px;
           border-radius: 50%;
           padding: 0px 35px;
         }
         .user-name {
-          font-size: 18px;
+          font-size: 20px;
+          color: $headerUserName;
+          font-weight: bold;
         }
       }
       .shopping-cart {

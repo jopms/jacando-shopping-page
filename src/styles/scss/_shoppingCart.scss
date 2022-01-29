@@ -4,18 +4,14 @@
   border: none;
   background-color: transparent;
   position: relative;
-
   padding: 0;
-
   .shopping-cart-img {
     height: 30px;
     padding: 18px 18px 18px 0;
-
     &:hover {
       cursor: pointer;
     }
   }
-
   .shopping-cart-notification {
     position: absolute;
     display: flex;
@@ -23,11 +19,104 @@
     align-items: center;
     right: 0;
     top: -10;
-    background-color: red;
+    background-color: $headerCartNotification;
     border-radius: 50%;
     width: 20px;
     height: 20px;
-    color: white;
+    color: $headerCartNotificationText;
     font-weight: bold;
+  }
+}
+
+.cart-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid $modalBorder;
+  background: $headerCartNotificationText;
+  overflow: auto;
+  border-radius: 30px;
+  outline: none;
+  padding: 40px;
+  .modal-no-items-text {
+    text-align: center;
+    padding: 15px 0;
+    font-size: 16px;
+    font-style: italic;
+  }
+}
+
+.cart-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: $modalBackgroundColor;
+}
+
+.ReactModal__Overlay {
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
+}
+
+.cart-modal-title {
+  text-align: center;
+  font-size: 26px;
+  min-width: 300px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.modal-individual-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+
+.modal-individual-item-text {
+  padding-left: 20px;
+}
+
+.modal-individual-item-quantity {
+  font-weight: bold;
+}
+
+.modal-title-separator {
+  border-top: 1px solid $modalTitleSeparator;
+  margin-top: 0;
+}
+
+.modal-individual-separator {
+  border-top: 1px solid $modalIndividualSeparator;
+}
+
+.modal-button-checkout-wrapper {
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+}
+
+.modal-button-checkout {
+  background-color: $modalButtonCheckout;
+  border: none;
+  padding: 14px 40px;
+  border-radius: 30px;
+  color: #ffff;
+  font-size: 15px;
+  cursor: pointer;
+  &:hover {
+    transition: all 0.2s ease-in-out;
+    background-color: $modalButtonCheckoutHover;
   }
 }

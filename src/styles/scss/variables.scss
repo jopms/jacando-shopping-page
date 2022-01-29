@@ -1,18 +1,31 @@
-$headerBackground: #e3f1eb;
+$headerBackground: #ffc244;
+$headerWrapper: #ffff;
+$headerUserName: #1f1f1f;
+$headerCartNotification: #d50a2a;
+$headerCartNotificationText: #ffff;
 
-$sidebarEntry: #1f865b;
+$sidebarEntry: #009f82;
 $sidebarShadow: #63636326;
-$sidebarEntryActive: #eefcf6;
+$sidebarEntryActive: #009f82;
+$sidebarEntryActiveText: #ffffff;
 
-$productNavigationArrow: #1f865b;
-$productNavigationArrowHover: #15573b;
-$productNavigationText: #1f865b;
-$productNavigationTextHover: #15573b;
+$productNavigationArrow: #009f82;
+$productNavigationArrowHover: #008a70;
+$productNavigationText: #009f82;
+$productNavigationTextHover: #009f82;
+$productItemBorder: #f1f1f1;
 
 $individualProductBoxShadow: #6d6d6d2c;
 $individualProductTitle: #1f1f1f;
 $individualProductDescription: #afafaf;
 $individualProductAddToBasket: #afafaf;
-$individualProductAddToBasketHover: #1f865b;
+$individualProductAddToBasketHover: #009f82;
 $individualProductAddToBasketBackground: #ffff;
 $individualProductQuantity: #1f1f1f;
+
+$modalBorder: #ccc;
+$modalBackgroundColor: #00000033;
+$modalTitleSeparator: #ffc244;
+$modalIndividualSeparator: #e2e2e2;
+$modalButtonCheckout: #009f82;
+$modalButtonCheckoutHover: #02856d;

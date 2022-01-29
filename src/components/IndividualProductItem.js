@@ -1,9 +1,12 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { updateGlobalBasket } from "../features/basket/basketSlicer";
 
 import "../styles/scss/_productItem.scss";
+import { getUpdatedBasket } from "../utils/getUpdatedBasket";
 
-/* ProductItem Component */
-const ProductItem = ({
+/* IndividualProductItem Component */
+const IndividualProductItem = ({
   title,
   description,
   price,
@@ -11,9 +14,31 @@ const ProductItem = ({
   unit,
   quantity,
   id,
-  updateBasket,
   basket,
 }) => {
+  const dispatch = useDispatch();
+
+  const updateBasket = (
+    itemQuantity,
+    id,
+    availableQuantity,
+    details,
+    basket
+  ) => {
+    const updatedBasket = getUpdatedBasket(
+      itemQuantity,
+      id,
+      availableQuantity,
+      details,
+      basket
+    );
+    
+    if (updatedBasket) {
+      dispatch(updateGlobalBasket(updatedBasket));
+      window.localStorage.setItem("basket", JSON.stringify(updatedBasket));
+    }
+  };
+
   return (
     <div className="category-content-wrapper">
       <div className="category-content">
@@ -28,7 +53,15 @@ const ProductItem = ({
         <div className="product-handle-basket-wrapper">
           <button
             className="product-handle-basket"
-            onClick={() => updateBasket(-1, id, quantity, { title, price })}
+            onClick={() => {
+              updateBasket(
+                -1,
+                id,
+                quantity,
+                { title, price, currency },
+                basket
+              );
+            }}
           >
             -
           </button>
@@ -40,7 +73,9 @@ const ProductItem = ({
           </div>
           <button
             className="product-handle-basket"
-            onClick={() => updateBasket(1, id, quantity, { title, price })}
+            onClick={() => {
+              updateBasket(1, id, quantity, { title, price, currency }, basket);
+            }}
           >
             +
           </button>
@@ -50,4 +85,4 @@ const ProductItem = ({
   );
 };
 
-export default ProductItem;
+export default IndividualProductItem;
