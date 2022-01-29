@@ -42,25 +42,26 @@
         color: $individualProductAddToBasket;
         padding: 0 8px;
       }
-      .product-handle-basket {
-        border: 2px solid $individualProductAddToBasket;
-        color: $individualProductAddToBasket;
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        background-color: $individualProductAddToBasketBackground;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 20px;
-        cursor: pointer;
-        transition: all 0.2s ease-in-out;
-        &:hover {
-          color: $individualProductAddToBasketHover;
-          border-color: $individualProductAddToBasketHover;
-        }
-      }
     }
+  }
+}
+
+.product-handle-basket {
+  border: 2px solid $individualProductAddToBasket;
+  color: $individualProductAddToBasket;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: $individualProductAddToBasketBackground;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    color: $individualProductAddToBasketHover;
+    border-color: $individualProductAddToBasketHover;
   }
 }
 

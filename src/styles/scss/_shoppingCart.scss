@@ -120,3 +120,8 @@
     background-color: $modalButtonCheckoutHover;
   }
 }
+
+.modal-change-item-button-wrapper{
+  display: flex;
+  justify-content: space-between;
+}

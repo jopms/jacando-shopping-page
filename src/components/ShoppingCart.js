@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import ChangeItemQuantityButton from "../components/ChangeItemQuantityButton";
+
+import { useDispatch } from "react-redux";
+import { updateGlobalBasket } from "../features/basket/basketSlicer";
+import { getUpdatedBasket } from "../utils/getUpdatedBasket";
 
 import shoppingCart from "../styles/img/shopping-cart.png";
 import "../styles/scss/_shoppingCart.scss";
@@ -7,6 +12,7 @@ import Modal from "react-modal";
 
 /* Shopping cart component */
 const ShoppingCart = () => {
+  const dispatch = useDispatch();
   const basket = useSelector((state) => state.basket.value);
 
   const [basketTotal, setBasketTotal] = useState(0);
@@ -15,6 +21,26 @@ const ShoppingCart = () => {
 
   const toggleModal = () => {
     setIsOpen(!isOpen);
+  };
+
+  const updateBasket = (
+    itemQuantity,
+    id,
+    availableQuantity,
+    details,
+    basket
+  ) => {
+    const updatedBasket = getUpdatedBasket(
+      itemQuantity,
+      id,
+      availableQuantity,
+      details,
+      basket
+    );
+    if (updatedBasket) {
+      dispatch(updateGlobalBasket(updatedBasket));
+      window.localStorage.setItem("basket", JSON.stringify(updatedBasket));
+    }
   };
 
   useEffect(() => {
@@ -37,7 +63,7 @@ const ShoppingCart = () => {
     basket.length === 0 ? (
       <div className="modal-no-items-text">No items in cart yet!</div>
     ) : (
-      basket.map((item, i) => (
+      basket.map((item) => (
         <div key={item.id}>
           <div className="modal-individual-item">
             <span>
@@ -48,9 +74,42 @@ const ShoppingCart = () => {
               {item.price} {item.currency}
             </span>
           </div>
-          {i < basket.length - 1 && (
-            <hr className="modal-individual-separator" />
-          )}
+          <div className="modal-change-item-button-wrapper">
+            <ChangeItemQuantityButton
+              symbol="-"
+              handleItemQuantity={() =>
+                updateBasket(
+                  -1,
+                  item.id,
+                  item.availableQuantity,
+                  {
+                    title: item.title,
+                    price: item.price,
+                    currency: item.currency,
+                  },
+                  basket
+                )
+              }
+            />
+            <ChangeItemQuantityButton
+              symbol="+"
+              handleItemQuantity={() =>
+                updateBasket(
+                  1,
+                  item.id,
+                  item.availableQuantity,
+                  {
+                    title: item.title,
+                    price: item.price,
+                    currency: item.currency,
+                  },
+                  basket
+                )
+              }
+            />
+          </div>
+
+          <hr className="modal-individual-separator" />
         </div>
       ))
     );
