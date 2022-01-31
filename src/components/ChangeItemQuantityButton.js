@@ -2,7 +2,9 @@ import React from "react";
 
 import "../styles/scss/_productItem.scss";
 
-/* Sidebar Component */
+/**
+ * Handles item quantity
+ */
 const ChangeItemQuantityButton = ({ symbol, handleItemQuantity }) => {
   return (
     <button

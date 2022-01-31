@@ -9,26 +9,32 @@ import { setTriggerGetItems } from "../features/items/itemsSlicer";
 import { setTriggerUpdateItems } from "../features/items/itemsSlicer";
 import { updateGlobalBasket } from "../features/basket/basketSlicer";
 
+/**
+ * Updates items query and loads spinenr
+ */
 const UpdateItems = ({ id, amount, closeCart }) => {
   const dispatch = useDispatch();
   const triggerUpdateItems = useSelector(
     (state) => state.items.triggerUpdateItems
   );
 
+  //Handles query update items error
   const handleError = () => {
     window.alert("Error! Could create order!");
     dispatch(setTriggerGetItems(true));
     closeCart(true);
   };
 
+  //Updates basket from local storage and redux value (success buy so deletes it) and reset triggers get items query to update front page
   const onUpdateItemsSuccess = () => {
-    orderVariable({
-      variables: {
-        items: id,
-      },
-    });
+    window.localStorage.removeItem("basket");
+    dispatch(setTriggerUpdateItems(false));
+    dispatch(updateGlobalBasket([]));
+    dispatch(setTriggerGetItems(true));
+    closeCart(true);
   };
 
+  //Update items query
   const [itemsVariable, { loading: loadingUpdateItems }] = useMutation(
     UPDATE_ITEM,
     {
@@ -37,23 +43,8 @@ const UpdateItems = ({ id, amount, closeCart }) => {
     }
   );
 
+  //After create order success query triggers updateItems query
   const onCreateOrderSuccess = () => {
-    window.localStorage.removeItem("basket");
-    dispatch(setTriggerUpdateItems(false));
-    dispatch(updateGlobalBasket([]));
-    dispatch(setTriggerGetItems(true));
-    closeCart(true);
-  };
-
-  const [orderVariable, { loading: loadingCreateOrder }] = useMutation(
-    CREATER_ORDER,
-    {
-      onCompleted: onCreateOrderSuccess,
-      onError: handleError,
-    }
-  );
-
-  useEffect(() => {
     id.forEach((id_, i) => {
       itemsVariable({
         variables: {
@@ -62,7 +53,26 @@ const UpdateItems = ({ id, amount, closeCart }) => {
         },
       });
     });
-  }, [triggerUpdateItems, amount, id, itemsVariable]);
+  };
+
+  //Create items query
+  const [orderVariable, { loading: loadingCreateOrder }] = useMutation(
+    CREATER_ORDER,
+    {
+      onCompleted: onCreateOrderSuccess,
+      onError: handleError,
+    }
+  );
+
+  //Triggers update item query
+  useEffect(() => {
+    triggerUpdateItems &&
+      orderVariable({
+        variables: {
+          items: id,
+        },
+      });
+  }, [id, orderVariable, triggerUpdateItems]);
 
   return <Spinner loading={loadingUpdateItems || loadingCreateOrder} />;
 };

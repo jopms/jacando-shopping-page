@@ -4,7 +4,9 @@ import ShoppingCart from "./ShoppingCart";
 import avatar from "../styles/img/img-avatar.png";
 import "../styles/scss/_header.scss";
 
-/* Header Component */
+/**
+ * Header component with logo, cart, and user info
+ */
 const Header = () => {
   return (
     <div className="header-wrapper">

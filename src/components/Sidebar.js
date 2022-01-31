@@ -3,7 +3,9 @@ import { NavLink } from "react-router-dom";
 
 import "../styles/scss/_sidebar.scss";
 
-/* Sidebar Component */
+/**
+ * Side bar menu for choosing category
+ */
 const Sidebar = () => {
   return (
     <div className="sidebar-wrapper">

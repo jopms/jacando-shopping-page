@@ -6,7 +6,9 @@ import ChangeItemQuantityButton from "../components/ChangeItemQuantityButton";
 import { getUpdatedBasket } from "../utils/getUpdatedBasket";
 import "../styles/scss/_productItem.scss";
 
-/* IndividualProductItem Component */
+/**
+ * Individual Product Item Card with title, description, amount available and quantity
+ */
 const IndividualProductItem = ({
   title,
   description,
@@ -19,6 +21,7 @@ const IndividualProductItem = ({
 }) => {
   const dispatch = useDispatch();
 
+  //Updates basket in local storage and redux variable
   const updateBasket = (
     itemQuantity,
     id,
@@ -58,9 +61,8 @@ const IndividualProductItem = ({
             }
             symbol="-"
           />
-
           <div className="product-basket-quantity">
-            {basket.length > 0 &&
+            {basket?.length > 0 &&
             basket.filter((i) => i?.id === id)[0]?.quantity
               ? basket.filter((i) => i?.id === id)[0]?.quantity
               : 0}

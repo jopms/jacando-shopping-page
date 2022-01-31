@@ -18,7 +18,6 @@ import { updateGlobalBasket } from "../features/basket/basketSlicer";
  * First fetches the amount of items to calculate pagination (necessary to fetch items)
  * Then fetches the items passing the pagination value, and limit, go get the corresponding data to each page (limited by limit variable)
  *
- *
  */
 const ProductItemCollection = ({ category }) => {
   const dispatch = useDispatch();

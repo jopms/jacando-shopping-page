@@ -10,7 +10,8 @@ export const getUpdatedBasket = (
   basket
 ) => {
   const currentItemQuantity = basket.filter((i) => i?.id === id)[0]?.quantity;
-  const updatedItemQuantity = (currentItemQuantity ? currentItemQuantity : 0) + itemQuantity;
+  const updatedItemQuantity =
+    (currentItemQuantity ? currentItemQuantity : 0) + itemQuantity;
   let updatedBasket = [];
 
   //Deletes object from basklet when there 's no quantity
@@ -32,12 +33,16 @@ export const getUpdatedBasket = (
   if (updatedItemQuantity <= availableQuantity && updatedItemQuantity >= 0) {
     updatedBasket = basket.map((i) => {
       if (i.id === id) {
-        return { id, quantity: updatedItemQuantity, ...details, availableQuantity };
+        return {
+          id,
+          quantity: updatedItemQuantity,
+          ...details,
+          availableQuantity,
+        };
       } else {
         return i;
       }
     });
     return updatedBasket;
   }
-
 };

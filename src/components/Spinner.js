@@ -2,6 +2,9 @@ import React from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 import { css } from "@emotion/react";
 
+/**
+ * Spinner component to use while fetching querys
+ */
 const Spinner = ({ loading }) => {
   const override = css`
     position: fixed;

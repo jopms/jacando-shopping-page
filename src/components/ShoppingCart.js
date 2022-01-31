@@ -12,9 +12,12 @@ import { updateGlobalBasket } from "../features/basket/basketSlicer";
 import { getUpdatedBasket } from "../utils/getUpdatedBasket";
 import { setTriggerUpdateItems } from "../features/items/itemsSlicer";
 
-/* Shopping cart component */
+/**
+ * Shopping cart component with cart modal and update/create query 
+ */
 const ShoppingCart = () => {
   const dispatch = useDispatch();
+
   const basket = useSelector((state) => state.basket.value);
   const triggerUpdateItems = useSelector(
     (state) => state.items.triggerUpdateItems
@@ -30,6 +33,7 @@ const ShoppingCart = () => {
     setIsOpen(!isOpen);
   };
 
+  //Saves array of amounts and array of id's for current buy
   const checkoutBuy = () => {
     if (basketTotal > 0) {
       let ids = [];
@@ -43,6 +47,7 @@ const ShoppingCart = () => {
     }
   };
 
+  //Updates basket in local storage and redux variable
   const updateBasket = (
     itemQuantity,
     id,
@@ -63,6 +68,7 @@ const ShoppingCart = () => {
     }
   };
 
+  //Updates total value for button
   useEffect(() => {
     if (basket.length > 0) {
       let count = 0;
@@ -79,6 +85,7 @@ const ShoppingCart = () => {
     }
   }, [basket, dispatch]);
 
+  //Triggers redux variable to updateItems query and createOrder mutation
   useEffect(() => {
     if (id.length > 0 && amount.length > 0) {
       dispatch(setTriggerUpdateItems(true));

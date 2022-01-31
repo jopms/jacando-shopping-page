@@ -45,7 +45,7 @@
 
 .product-item-wrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, auto ));
+  grid-template-columns: repeat(auto-fit, minmax(230px, auto));
   grid-gap: 30px;
   width: 100%;
   padding: 70px;
@@ -58,6 +58,9 @@
 .product-wrapper {
   width: calc(100% - 10rem - 230px);
   .product-arrows {
+    background-color: white;
+    z-index: 2;
+    padding: 0 20px;
     position: fixed;
     width: calc(100% - 10rem - 250px - 140px);
     display: flex;
