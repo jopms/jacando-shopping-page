@@ -1,26 +1,46 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import ChangeItemQuantityButton from "../components/ChangeItemQuantityButton";
+import { useSelector, useDispatch } from "react-redux";
+import Modal from "react-modal";
 
-import { useDispatch } from "react-redux";
-import { updateGlobalBasket } from "../features/basket/basketSlicer";
-import { getUpdatedBasket } from "../utils/getUpdatedBasket";
+import ChangeItemQuantityButton from "../components/ChangeItemQuantityButton";
+import UpdateItems from "../components/UpdateItems";
 
 import shoppingCart from "../styles/img/shopping-cart.png";
 import "../styles/scss/_shoppingCart.scss";
-import Modal from "react-modal";
+
+import { updateGlobalBasket } from "../features/basket/basketSlicer";
+import { getUpdatedBasket } from "../utils/getUpdatedBasket";
+import { setTriggerUpdateItems } from "../features/items/itemsSlicer";
 
 /* Shopping cart component */
 const ShoppingCart = () => {
   const dispatch = useDispatch();
   const basket = useSelector((state) => state.basket.value);
+  const triggerUpdateItems = useSelector(
+    (state) => state.items.triggerUpdateItems
+  );
 
   const [basketTotal, setBasketTotal] = useState(0);
   const [basketTotalAmount, setBasketTotalAmount] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
+  const [id, setId] = useState([]);
+  const [amount, setAmount] = useState([]);
 
   const toggleModal = () => {
     setIsOpen(!isOpen);
+  };
+
+  const checkoutBuy = () => {
+    if (basketTotal > 0) {
+      let ids = [];
+      let quantity = [];
+      basket.forEach((item) => {
+        ids.push(item.id);
+        quantity.push(item.availableQuantity - item.quantity);
+      });
+      setAmount(quantity);
+      setId(ids);
+    }
   };
 
   const updateBasket = (
@@ -58,6 +78,12 @@ const ShoppingCart = () => {
       setBasketTotalAmount(0);
     }
   }, [basket]);
+
+  useEffect(() => {
+    if (id.length > 0 && amount.length > 0) {
+      dispatch(setTriggerUpdateItems(true));
+    }
+  }, [id, amount]);
 
   const renderCartItems = () =>
     basket.length === 0 ? (
@@ -108,7 +134,6 @@ const ShoppingCart = () => {
               }
             />
           </div>
-
           <hr className="modal-individual-separator" />
         </div>
       ))
@@ -131,14 +156,17 @@ const ShoppingCart = () => {
         contentLabel="Cart Modal"
         className="cart-modal"
         overlayClassName="cart-modal-overlay"
-        closeTimeoutMS={300}
+        closeTimeoutMS={0}
       >
         <>
           <div className="cart-modal-title">My cart</div>
           <hr className="modal-title-separator" />
-          {renderCartItems()}
+          <div className="cart-modal-content"> {renderCartItems()}</div>
           <div className="modal-button-checkout-wrapper">
-            <button className="modal-button-checkout" onClick={toggleModal}>
+            <button
+              className="modal-button-checkout"
+              onClick={basketTotal > 0 ? checkoutBuy : toggleModal}
+            >
               <b>
                 {basketTotal > 0
                   ? `Buy ● ${basketTotalAmount} ${basket[0]?.currency}`
@@ -148,6 +176,9 @@ const ShoppingCart = () => {
           </div>
         </>
       </Modal>
+      {triggerUpdateItems && (
+        <UpdateItems id={id} amount={amount} closeCart={toggleModal} />
+      )}
     </>
   );
 };

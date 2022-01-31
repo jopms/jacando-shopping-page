@@ -1,8 +1,8 @@
 import React from "react";
 import ShoppingCart from "./ShoppingCart";
 
-import "../styles/scss/_header.scss";
 import avatar from "../styles/img/img-avatar.png";
+import "../styles/scss/_header.scss";
 
 /* Header Component */
 const Header = () => {

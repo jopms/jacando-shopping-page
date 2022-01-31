@@ -3,8 +3,8 @@ import { useDispatch } from "react-redux";
 import { updateGlobalBasket } from "../features/basket/basketSlicer";
 import ChangeItemQuantityButton from "../components/ChangeItemQuantityButton";
 
-import "../styles/scss/_productItem.scss";
 import { getUpdatedBasket } from "../utils/getUpdatedBasket";
+import "../styles/scss/_productItem.scss";
 
 /* IndividualProductItem Component */
 const IndividualProductItem = ({
@@ -48,7 +48,7 @@ const IndividualProductItem = ({
         <div className="product-price">
           <span>{price}</span>
           <span>{currency}</span>
-          <span>/{unit}</span>
+          {unit && <span>/{unit}</span>}
           <span className="product-quantity">({quantity} in stock)</span>
         </div>
         <div className="product-handle-basket-wrapper">

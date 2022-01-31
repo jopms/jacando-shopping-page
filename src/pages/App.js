@@ -1,24 +1,66 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import ProductItemCollection from "../components/ProductItemCollection";
 import Header from "../components/Header";
 import Categories from "../components/Sidebar";
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  HttpLink,
+  from,
+} from "@apollo/client";
+import { onError } from "@apollo/client/link/error";
+
+const errorLink = onError(({ graphqlErrors, networkError }) => {
+  if (graphqlErrors) {
+    graphqlErrors.map(({ message, location, path }) => {
+      alert(`Graphql error ${message}`);
+    });
+  }
+});
+
+const link = from([
+  errorLink,
+  new HttpLink({ uri: "http://localhost:4000/graphql" }),
+]);
+
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  link,
+});
 
 /* Handles Routing */
 const App = () => {
   return (
-    <Router>
-      <Header />
-      <div className="main">
-        <Categories />
-        <Routes>
-          <Route path="/" exact element={<ProductItemCollection category={"home"}/>} />
-          <Route path="vegetables" element={<ProductItemCollection category={"vegetables"}/>} />
-          <Route path="fruits" element={<ProductItemCollection category={"fruits"}/>} />
-          <Route path="cheese" element={<ProductItemCollection category={"cheese"}/>} />
-        </Routes>
-      </div>
-    </Router>
+    <ApolloProvider client={client}>
+      <Router>
+        <Header />
+        <div className="main">
+          <Categories />
+          <Routes>
+            <Route path="/" exact element={<Navigate to="/vegetables" />} />
+            <Route
+              path="vegetables"
+              element={<ProductItemCollection category={"vegetables"} />}
+            />
+            <Route
+              path="fruits"
+              element={<ProductItemCollection category={"fruits"} />}
+            />
+            <Route
+              path="cheese"
+              element={<ProductItemCollection category={"cheese"} />}
+            />
+          </Routes>
+        </div>
+      </Router>
+    </ApolloProvider>
   );
 };
 

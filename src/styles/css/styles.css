@@ -8,7 +8,7 @@ body {
 #root {
   height: 100%;
   margin: 0 5rem;
-  max-width: 3000px;
+  max-width: 1700px;
 }
 
 body > * {
@@ -21,8 +21,37 @@ body > * {
   min-height: 525px;
 }
 
-@media only screen and (min-width: 3160px) {
+body::-webkit-scrollbar-track-piece:start {
+  margin-top: 320px;
+}
+
+@media only screen and (min-width: 1860px) {
   #root {
     margin: auto;
+  }
+}
+
+@media only screen and (max-width: 1039px) {
+  .product-wrapper {
+    display: flex;
+    width: 100%;
+    margin-left: 240px;
+    justify-content: center;
+  }
+  .product-wrapper .product-arrows {
+    margin-left: 0;
+    min-width: 230px;
+  }
+  .product-item-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 0;
+  }
+}
+@media only screen and (max-width: 720px) {
+  .header-wrapper {
+    width: calc(100% - 9rem);
   }
 }

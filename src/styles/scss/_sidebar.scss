@@ -31,12 +31,11 @@
     &:hover {
       cursor: pointer;
       box-shadow: none;
-    
+
       background-color: $sidebarEntryActive;
       color: $sidebarEntryActiveText;
     }
     &.active {
-     
       box-shadow: none;
       background-color: $sidebarEntryActive;
       color: $sidebarEntryActiveText;
@@ -46,55 +45,61 @@
 
 .product-item-wrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   grid-gap: 30px;
   width: 100%;
   padding: 70px;
   margin: auto;
   margin-left: 250px;
-}
-
-.product-arrows {
-  position: fixed;
-  width: calc(100% - 10rem - 250px);
-  display: flex;
-  justify-content: space-between;
-  margin-left: 250px;
-  .product-arrow-text {
-    display: flex;
-    align-items: center;
-    font-size: 25px;
-    color: $productNavigationText;
+  > .category-content-wrapper {
+    justify-content: center;
   }
-  button {
-    background-color: transparent;
-    border-radius: 50%;
-    border: 2px solid $productNavigationArrow;
-    margin: 0 100px;
-    height: 44px;
-    width: 44px;
-    padding: 0px;
-    transition: all 0.2s ease-in-out;
-    svg {
-     
-      width: 40px !important;
-      height: 40px !important;
+}
+.product-wrapper {
+  width: calc(100% - 10rem - 230px);
+  .product-arrows {
+    position: fixed;
+    width: calc(100% - 10rem - 250px - 140px);
+    display: flex;
+    justify-content: space-between;
+    margin-left: 320px;
+    max-width: 1300px;
+    .product-arrow-text {
+      display: flex;
+      align-items: center;
+      font-size: 25px;
+      color: $productNavigationText;
+      font-weight: 500;
     }
-    &:hover {
-     background-color: $productNavigationArrow;;
-      cursor: pointer;
-      .arrow {
-        path {
-          fill: white;
+    button {
+      background-color: transparent;
+      border-radius: 50%;
+      border: 2px solid $productNavigationArrow;
+
+      height: 44px;
+      width: 44px;
+      padding: 0px;
+      transition: all 0.2s ease-in-out;
+      svg {
+        width: 40px !important;
+        height: 40px !important;
+      }
+      &:hover {
+        background-color: $productNavigationArrow;
+        cursor: pointer;
+        .arrow {
+          path {
+            fill: white;
+          }
         }
       }
     }
-  }
-  .arrow {
-    path {
-      fill: $productNavigationArrow;
+    .arrow {
+      path {
+        fill: $productNavigationArrow;
+      }
+      height: 48px;
+      width: 48px;
     }
-    height: 48px;
-    width: 48px;
   }
 }

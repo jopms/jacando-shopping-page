@@ -1,18 +1,53 @@
-import React, { useEffect } from "react";
-import IndividualProductItem from "../components/IndividualProductItem";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { updateGlobalBasket } from "../features/basket/basketSlicer";
+import { useQuery } from "@apollo/client";
+import { GET_ITEMS_AMOUNT } from "../graphQl/Queries";
+import IndividualProductItem from "../components/IndividualProductItem";
+import GetItems from "../components/GetItems";
 
 import { ReactComponent as CaretLeft } from "../styles/img/caret-left.svg";
 import { ReactComponent as CaretRight } from "../styles/img/caret-right.svg";
 
-/* List of product items */
+import { updateGlobalBasket } from "../features/basket/basketSlicer";
+
+/**
+ * Renders list of product items
+ *
+ * First fetches the amount of items to calculate pagination (necessary to fetch items)
+ * Then fetches the items passing the pagination value, and limit, go get the corresponding data to each page (limited by limit variable)
+ *
+ *
+ */
 const ProductItemCollection = ({ category }) => {
   const dispatch = useDispatch();
   const basket = useSelector((state) => state.basket.value);
+  const items = useSelector((state) => state.items.value);
 
-  console.log(category);
+  const [itemsAmount, setItemsAmount] = useState(0); //Total of items amount
+  const [pagination, setPagination] = useState(0); //Current page being displayed
 
+  //Function that runs when query get item is completed - Updates amount of items value
+  const onQueryGetItemsCompleted = () => {
+    data?.itemsAmount?.count > 0 && setItemsAmount(data?.itemsAmount.count);
+  };
+
+  //Sets pagination value
+  const handlePagination = (amount) => {
+    if (
+      amount + pagination >= 0 &&
+      amount + pagination < Math.ceil(itemsAmount / 5)
+    ) {
+      setPagination(pagination + amount);
+    }
+  };
+
+  //Query to get item's amount
+  const { error, loading, data } = useQuery(GET_ITEMS_AMOUNT, {
+    variables: { category },
+    onCompleted: onQueryGetItemsCompleted,
+  });
+
+  //Updates basket depending on localStorage value
   useEffect(() => {
     const localStorageBasket = JSON.parse(
       window.localStorage.getItem("basket")
@@ -24,75 +59,70 @@ const ProductItemCollection = ({ category }) => {
     }
   }, [dispatch]);
 
-  const desc =
-    "A banana is a tropical fruit that's quite popular all over the world. It grows in bunches on a banana tree.";
+  //Trigger loading spinner when query is getting item's amount
+  useEffect(() => {
+    loading && console.log("LOADING GET AMOUNT!");
+  }, [loading]);
+
+  //Triggers error message when query get item's amount is not successful
+  useEffect(() => {
+    error && window.alert("Error! Could not get item's amount!");
+  }, [error]);
+
   return (
-    <>
-      <div className="product-arrows">
-        <button>
-          <CaretLeft className="arrow" />
-        </button>
-        <div className="product-arrow-text">1/500</div>
-        <button>
-          <CaretRight className="arrow" />
-        </button>
-      </div>
+    <div className="product-wrapper">
+      {itemsAmount ? (
+        <div className="product-arrows">
+          <button>
+            <CaretLeft
+              className="arrow"
+              onClick={() => {
+                handlePagination(-1);
+              }}
+            />
+          </button>
+          <div className="product-arrow-text">
+            {pagination + 1}/{Math.ceil(itemsAmount / 5)}
+          </div>
+          <button>
+            <CaretRight
+              className="arrow"
+              onClick={() => {
+                handlePagination(1);
+              }}
+            />
+          </button>
+        </div>
+      ) : (
+        ""
+      )}
       <div className="product-item-wrapper">
-        <IndividualProductItem
-          title="Banana"
-          description={desc}
-          price={3.5}
-          currency="€"
-          unit="kg"
-          quantity={3}
-          basket={basket}
-          id={0}
-        />
-        <IndividualProductItem
-          title="Orange"
-          description={desc}
-          price={4}
-          currency="€"
-          unit="kg"
-          quantity={12}
-          basket={basket}
-          id={1}
-        />
-
-        <IndividualProductItem
-          title="Pear"
-          description={desc}
-          price={3}
-          currency="€"
-          unit="kg"
-          quantity={5}
-          basket={basket}
-          id={2}
-        />
-
-        <IndividualProductItem
-          title="Mango"
-          description={desc}
-          price={5}
-          currency="€"
-          unit="kg"
-          quantity={20}
-          basket={basket}
-          id={3}
-        />
-
-        <IndividualProductItem
-          title="Banana"
-          description={desc}
-          price={2}
-          currency="€"
-          unit="kg"
-          quantity={23}
-          basket={basket}
-          id={4}
-        />
+        {items &&
+          items.map((item) => {
+            return (
+              <IndividualProductItem
+                key={item.id}
+                title={item.title}
+                description={item.description}
+                price={item.price}
+                currency={item.currency}
+                unit={item.unit}
+                quantity={item.amount}
+                basket={basket}
+                id={item.id}
+              />
+            );
+          })}
       </div>
-    </>
+      {itemsAmount ? (
+        <GetItems
+          category={category}
+          pagination={pagination * 5}
+        />
+      ) : (
+        ""
+      )}
+    </div>
   );
 };
 

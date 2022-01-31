@@ -8,9 +8,6 @@ const Sidebar = () => {
   return (
     <div className="sidebar-wrapper">
       <div className="sidebar-title">Categories</div>
-      <NavLink className="sidebar-entry" to="/">
-        Home
-      </NavLink>
       <NavLink className="sidebar-entry" to="/vegetables">
         Vegetables
       </NavLink>
