@@ -33,7 +33,19 @@ const GetItems = ({ category, pagination }) => {
   }, [error]);
 
   useEffect(() => {
-    data && dispatch(updateItems(data.items));
+    if (data) {
+      if (data.items.length === 5) {
+        dispatch(updateItems(data.items));
+      } else {
+        console.log(data.items);
+        const missingItems = 5 - data.items.length;
+        const items = [...data.items];
+        for (let i = 0; i < missingItems; i++) {
+          items.push({});
+        }
+        dispatch(updateItems(items));
+      }
+    }
   }, [data]);
 
   useEffect(() => {

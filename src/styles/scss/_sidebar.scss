@@ -45,7 +45,7 @@
 
 .product-item-wrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(230px, auto ));
   grid-gap: 30px;
   width: 100%;
   padding: 70px;

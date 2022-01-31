@@ -99,7 +99,7 @@ const ProductItemCollection = ({ category }) => {
       <div className="product-item-wrapper">
         {items &&
           items.map((item) => {
-            return (
+            return item.id ? (
               <IndividualProductItem
                 key={item.id}
                 title={item.title}
@@ -111,14 +111,13 @@ const ProductItemCollection = ({ category }) => {
                 basket={basket}
                 id={item.id}
               />
+            ) : (
+              <div></div>
             );
           })}
       </div>
       {itemsAmount ? (
-        <GetItems
-          category={category}
-          pagination={pagination * 5}
-        />
+        <GetItems category={category} pagination={pagination * 5} />
       ) : (
         ""
       )}
