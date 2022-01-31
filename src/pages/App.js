@@ -17,9 +17,9 @@ import {
 } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
 
-const errorLink = onError(({ graphqlErrors, networkError }) => {
+const errorLink = onError(({ graphqlErrors }) => {
   if (graphqlErrors) {
-    graphqlErrors.map(({ message, location, path }) => {
+    graphqlErrors.forEach(({ message }) => {
       alert(`Graphql error ${message}`);
     });
   }

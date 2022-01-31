@@ -5,6 +5,7 @@ import { GET_ITEMS } from "../graphQl/Queries";
 
 import { updateItems } from "../features/items/itemsSlicer";
 import { setTriggerGetItems } from "../features/items/itemsSlicer";
+import Spinner from "./Spinner";
 
 const GetItems = ({ category, pagination }) => {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ const GetItems = ({ category, pagination }) => {
     {
       skip: false,
       variables: { category, limit: 5, index: pagination },
+      fetchPolicy: "network-only",
     },
 
     {
@@ -25,10 +27,6 @@ const GetItems = ({ category, pagination }) => {
   );
 
   useEffect(() => {
-    loading && console.log("LOADING GET ITEMS!");
-  }, [loading]);
-
-  useEffect(() => {
     error && window.alert("Error! Could not get items!");
   }, [error]);
 
@@ -37,23 +35,26 @@ const GetItems = ({ category, pagination }) => {
       if (data.items.length === 5) {
         dispatch(updateItems(data.items));
       } else {
-        console.log(data.items);
-        const missingItems = 5 - data.items.length;
-        const items = [...data.items];
-        for (let i = 0; i < missingItems; i++) {
-          items.push({});
+        if (data.items.length > 0) {
+          const missingItems = 5 - data.items.length;
+          const items = [...data.items];
+          for (let i = 0; i < missingItems; i++) {
+            items.push({});
+          }
+          dispatch(updateItems(items));
+        } else {
+          dispatch(updateItems([])); //User buys last item of current page
         }
-        dispatch(updateItems(items));
       }
     }
-  }, [data]);
+  }, [data, dispatch]);
 
   useEffect(() => {
     triggerGetItems && refetch();
     dispatch(setTriggerGetItems(false));
-  }, [triggerGetItems]);
+  }, [triggerGetItems, dispatch, refetch]);
 
-  return <></>;
+  return <Spinner loading={loading} />;
 };
 
 export default GetItems;

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useQuery } from "@apollo/client";
+import Spinner from "../components/Spinner";
+
 import { GET_ITEMS_AMOUNT } from "../graphQl/Queries";
 import IndividualProductItem from "../components/IndividualProductItem";
 import GetItems from "../components/GetItems";
@@ -42,9 +44,10 @@ const ProductItemCollection = ({ category }) => {
   };
 
   //Query to get item's amount
-  const { error, loading, data } = useQuery(GET_ITEMS_AMOUNT, {
+  const { error, loading, data, refetch } = useQuery(GET_ITEMS_AMOUNT, {
     variables: { category },
     onCompleted: onQueryGetItemsCompleted,
+    fetchPolicy: "network-only",
   });
 
   //Updates basket depending on localStorage value
@@ -59,69 +62,78 @@ const ProductItemCollection = ({ category }) => {
     }
   }, [dispatch]);
 
-  //Trigger loading spinner when query is getting item's amount
-  useEffect(() => {
-    loading && console.log("LOADING GET AMOUNT!");
-  }, [loading]);
-
   //Triggers error message when query get item's amount is not successful
   useEffect(() => {
     error && window.alert("Error! Could not get item's amount!");
   }, [error]);
 
+  useEffect(() => {
+    category && setPagination(0);
+  }, [category]);
+
+  useEffect(() => {
+    if (items.length === 0) {
+      refetch();
+      setPagination(0);
+    }
+  }, [items, refetch]);
+
   return (
-    <div className="product-wrapper">
-      {itemsAmount ? (
-        <div className="product-arrows">
-          <button>
-            <CaretLeft
-              className="arrow"
-              onClick={() => {
-                handlePagination(-1);
-              }}
-            />
-          </button>
-          <div className="product-arrow-text">
-            {pagination + 1}/{Math.ceil(itemsAmount / 5)}
-          </div>
-          <button>
-            <CaretRight
-              className="arrow"
-              onClick={() => {
-                handlePagination(1);
-              }}
-            />
-          </button>
-        </div>
-      ) : (
-        ""
-      )}
-      <div className="product-item-wrapper">
-        {items &&
-          items.map((item) => {
-            return item.id ? (
-              <IndividualProductItem
-                key={item.id}
-                title={item.title}
-                description={item.description}
-                price={item.price}
-                currency={item.currency}
-                unit={item.unit}
-                quantity={item.amount}
-                basket={basket}
-                id={item.id}
+    <>
+      <div className="product-wrapper">
+        {itemsAmount ? (
+          <div className="product-arrows">
+            <button>
+              <CaretLeft
+                className="arrow"
+                onClick={() => {
+                  handlePagination(-1);
+                }}
               />
-            ) : (
-              <div></div>
-            );
-          })}
+            </button>
+            <div className="product-arrow-text">
+              {pagination + 1}/{Math.ceil(itemsAmount / 5)}
+            </div>
+            <button>
+              <CaretRight
+                className="arrow"
+                onClick={() => {
+                  handlePagination(1);
+                }}
+              />
+            </button>
+          </div>
+        ) : (
+          ""
+        )}
+        <div className="product-item-wrapper">
+          {items &&
+            items.map((item, i) => {
+              return item.id ? (
+                <IndividualProductItem
+                  key={item.id}
+                  title={item.title}
+                  description={item.description}
+                  price={item.price}
+                  currency={item.currency}
+                  unit={item.unit}
+                  quantity={item.amount}
+                  basket={basket}
+                  id={item.id}
+                />
+              ) : (
+                <div key={`item-key-${i}`}></div>
+              );
+            })}
+        </div>
+        {itemsAmount ? (
+          <GetItems category={category} pagination={pagination * 5} />
+        ) : (
+          ""
+        )}
       </div>
-      {itemsAmount ? (
-        <GetItems category={category} pagination={pagination * 5} />
-      ) : (
-        ""
-      )}
-    </div>
+      <Spinner loading={loading} />
+    </>
   );
 };
 

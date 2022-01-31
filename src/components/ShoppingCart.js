@@ -77,13 +77,13 @@ const ShoppingCart = () => {
       setBasketTotal(0);
       setBasketTotalAmount(0);
     }
-  }, [basket]);
+  }, [basket, dispatch]);
 
   useEffect(() => {
     if (id.length > 0 && amount.length > 0) {
       dispatch(setTriggerUpdateItems(true));
     }
-  }, [id, amount]);
+  }, [id, amount, dispatch]);
 
   const renderCartItems = () =>
     basket.length === 0 ? (

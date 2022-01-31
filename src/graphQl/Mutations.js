@@ -25,3 +25,11 @@ export const UPDATE_ITEM = gql`
     }
   }
 `;
+
+export const CREATER_ORDER = gql`
+  mutation createOrder($items: [String]!) {
+    createOrder(order: { items: $items }) {
+      id
+    }
+  }
+`;

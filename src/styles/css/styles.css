@@ -31,6 +31,15 @@ body::-webkit-scrollbar-track-piece:start {
   }
 }
 
+@media only screen and (max-width: 1200px) {
+  .header-wrapper .header {
+    justify-content: flex-start;
+  }
+  .org-logo-wrapper {
+    padding-left: 50px;
+  }
+}
+
 @media only screen and (max-width: 1039px) {
   .product-wrapper {
     display: flex;
@@ -50,8 +59,33 @@ body::-webkit-scrollbar-track-piece:start {
     margin-left: 0;
   }
 }
+
+@media only screen and (max-width: 850px) {
+  .header-wrapper .header .org-logo {
+    font-size: 20px;
+  }
+  .header-wrapper .header .org-logo-subtitle {
+    font-size: 13px;
+    letter-spacing: 3px;
+  }
+}
+
 @media only screen and (max-width: 720px) {
   .header-wrapper {
     width: calc(100% - 9rem);
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .org-logo-wrapper {
+    padding-left: 25px;
+  }
+  .header-wrapper .header .user-settings .user .user-name {
+    font-size: 11px;
+  }
+  .header-wrapper .header .user-settings .user .user-logo {
+    height: 20px;
+    width: 20px;
+    padding: 0 10px;
   }
 }

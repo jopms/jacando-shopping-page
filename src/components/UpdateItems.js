@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import Spinner from "./Spinner";
 import { useMutation } from "@apollo/client";
 import { UPDATE_ITEM } from "../graphQl/Mutations";
+import { CREATER_ORDER } from "../graphQl/Mutations";
 
 import { setTriggerGetItems } from "../features/items/itemsSlicer";
 import { setTriggerUpdateItems } from "../features/items/itemsSlicer";
@@ -13,7 +15,29 @@ const UpdateItems = ({ id, amount, closeCart }) => {
     (state) => state.items.triggerUpdateItems
   );
 
-  const onMutationSuccess = () => {
+  const handleError = () => {
+    window.alert("Error! Could create order!");
+    dispatch(setTriggerGetItems(true));
+    closeCart(true);
+  };
+
+  const onUpdateItemsSuccess = () => {
+    orderVariable({
+      variables: {
+        items: id,
+      },
+    });
+  };
+
+  const [itemsVariable, { loading: loadingUpdateItems }] = useMutation(
+    UPDATE_ITEM,
+    {
+      onCompleted: onUpdateItemsSuccess,
+      onError: handleError,
+    }
+  );
+
+  const onCreateOrderSuccess = () => {
     window.localStorage.removeItem("basket");
     dispatch(setTriggerUpdateItems(false));
     dispatch(updateGlobalBasket([]));
@@ -21,15 +45,12 @@ const UpdateItems = ({ id, amount, closeCart }) => {
     closeCart(true);
   };
 
-  const getError = () => {
-    window.alert("Error! Could not buy items!")
-    dispatch(setTriggerGetItems(true));
-    closeCart(true);
-  };
-
-  const [itemsVariable] = useMutation(
-    UPDATE_ITEM,
-    { onCompleted: onMutationSuccess, onError: getError }
+  const [orderVariable, { loading: loadingCreateOrder }] = useMutation(
+    CREATER_ORDER,
+    {
+      onCompleted: onCreateOrderSuccess,
+      onError: handleError,
+    }
   );
 
   useEffect(() => {
@@ -41,9 +62,9 @@ const UpdateItems = ({ id, amount, closeCart }) => {
         },
       });
     });
-  }, [triggerUpdateItems]);
+  }, [triggerUpdateItems, amount, id, itemsVariable]);
 
-  return <></>;
+  return <Spinner loading={loadingUpdateItems || loadingCreateOrder} />;
 };
 
 export default UpdateItems;
