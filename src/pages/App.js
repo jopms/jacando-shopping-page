@@ -27,7 +27,7 @@ const errorLink = onError(({ graphqlErrors }) => {
 
 const link = from([
   errorLink,
-  new HttpLink({ uri: "http://localhost:4000/graphql" }),
+  new HttpLink({ uri: "https://jopms-grocery.herokuapp.com/graphql" }),
 ]);
 
 const client = new ApolloClient({
