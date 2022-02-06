@@ -1,2 +1,3 @@
 # jacando-shopping-page
-Shopping page with the possibilty to choose between categories and add items to the shopping cart.
+A shopping application were you search between 3 different categories and fetch items from a MongoDB database.
+Built using React, SASS, Redux, Apollo Graphql, Mongoose, Nodejs and Express!
