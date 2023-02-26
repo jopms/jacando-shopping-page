@@ -1,19 +1,19 @@
 import React from "react";
 import {
   BrowserRouter as Router,
-  Routes,
-  Route,
   Navigate,
+  Route,
+  Routes,
 } from "react-router-dom";
 import ProductItemCollection from "../components/ProductItemCollection";
 import Header from "../components/Header";
 import Categories from "../components/Sidebar";
 import {
   ApolloClient,
-  InMemoryCache,
   ApolloProvider,
-  HttpLink,
   from,
+  HttpLink,
+  InMemoryCache,
 } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
 
@@ -27,7 +27,7 @@ const errorLink = onError(({ graphqlErrors }) => {
 
 const link = from([
   errorLink,
-  new HttpLink({ uri: "https://jopms-grocery.herokuapp.com/graphql" }),
+  new HttpLink({ uri: "https://jolly-hare-long-johns.cyclic.app/graphql" }),
 ]);
 
 const client = new ApolloClient({
